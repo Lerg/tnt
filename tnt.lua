@@ -134,7 +134,7 @@ function _M:newTimer (duration, callback, count, params)
         if not self.paused then
             self.paused = true
             self.pausingTime = system.getTimer()
-            self.remainingTime = self.remainingTime - (self.pausingTime - self.intervalStartTime)
+            self.remainingTime = self.remainingTime - ((self.pausingTime - self.intervalStartTime) / _M.speed)
             if self.remainingTime < 0 then
                 self.remainingTime = 0
             end
