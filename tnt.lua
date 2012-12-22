@@ -12,11 +12,11 @@
 --      timer1 = tnt:newTimer(1000, function () print('tick') end, 1, {name = 'Tick Timer', userData = 'User data', onEnd = function (event) print(event.name .. ' has completed') end})
 --      trans1 = tnt:newTransition(object, {time = 1000, x = 480, name = 'Slide Transition', userData = 'User data', cycle = 10, backAndForth = true, onEnd = function (object, event) print(event.name .. ' has completed') end})
 --  Name and userData arguments are optional. userData can be anything.
---  onEnd callback (or object listener) is fired once timer or transition has finished it's job completely, after all ticks or transition cycles.
+--  onEnd callback (or object listener) is fired once timer or transition has finished its job completely, after all ticks or transition cycles, calling either the callback method or the appropriate method of the object listener: timerEnd or transitionEnd.
 --  With cycle param you can tell transition to loop. 0 - infinite times. You can also set backAndForth param.
 --  Every instance has pause(), resume() and cancel() methods.
 --  You can manage all timers and transitions with function like tnt:pauseAllTimers(), tnt:resumeAllTransitions() etc.
---  For speed adjustment first pause all timers and transitions, then modify tnt.speed to say 0.5, which means 2 times faster
+--  For speed adjustment first pause all timers and transitions, then modify tnt.speed to say 0.5, which means 2 times faster.
 --  and lastly resume all paused instances.
 --
 -- LIMITATIONS:
@@ -257,7 +257,7 @@ function _M:newTransition(object, params)
         end
     end
  
-    -- This function is called for each completed transition to mark it's handler for removal
+    -- This function is called for each completed transition to mark its handler for removal
     local function callbackWrapper ()
         if type(onComplete) == 'function' then
             onComplete(object, {userData = tH.userData, name = tH.name})
